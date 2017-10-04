@@ -21,8 +21,8 @@ import java.util.List;
  * Created by LaunchCode
  */
 @Controller
-@RequestMapping("cheese")
-public class CheeseController {
+@RequestMapping("animal")
+public class AnimalController {
 
     @Autowired
     private CheeseDao cheeseDao;
@@ -30,12 +30,12 @@ public class CheeseController {
     @Autowired
     private CategoryDao categoryDao;
 
-    // Request path: /cheese
+    // Request path: /animal
     @RequestMapping(value = "")
     public String index(Model model) {
         model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", "My Cheeses");
-        return "cheese/index";
+        return "animal/index";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
@@ -43,7 +43,7 @@ public class CheeseController {
         model.addAttribute("title", "Add Cheese");
         model.addAttribute(new Cheese());
         model.addAttribute("categories", categoryDao.findAll());
-        return "cheese/add";
+        return "animal/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
@@ -55,7 +55,7 @@ public class CheeseController {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
             model.addAttribute("categories", categoryDao.findAll());
-            return "cheese/add";
+            return "animal/add";
         }
 
         Category cat = categoryDao.findOne(categoryId);
@@ -68,7 +68,7 @@ public class CheeseController {
     public String displayRemoveCheeseForm(Model model) {
         model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", "Remove Cheese");
-        return "cheese/remove";
+        return "animal/remove";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
@@ -88,7 +88,7 @@ public class CheeseController {
         List<Cheese> cheeses = cat.getCheeses();
         model.addAttribute("cheeses",cheeses);
         model.addAttribute("title", "Cheeses in Category: " + cat.getName());
-        return "cheese/index";
+        return "animal/index";
 
     }
 
