@@ -1,9 +1,7 @@
 package org.launchcode.controllers;
 
 import org.launchcode.models.Category;
-import org.launchcode.models.Cheese;
-import org.launchcode.models.CheeseType;
-import org.launchcode.models.data.CategoryDao;
+import org.launchcode.models.data.AnimalDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +21,7 @@ import javax.validation.Valid;
 public class SpeciesController {
 
     @Autowired
-    private CategoryDao categoryDao;
+    private AnimalDao categoryDao;
 
     // Request path: /species
     @RequestMapping(value = "")

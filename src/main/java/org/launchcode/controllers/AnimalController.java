@@ -2,9 +2,8 @@ package org.launchcode.controllers;
 
 import org.launchcode.models.Category;
 import org.launchcode.models.Cheese;
-import org.launchcode.models.CheeseType;
-import org.launchcode.models.data.CategoryDao;
-import org.launchcode.models.data.CheeseDao;
+import org.launchcode.models.data.AnimalDao;
+import org.launchcode.models.data.SpeciesDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,15 +24,15 @@ import java.util.List;
 public class AnimalController {
 
     @Autowired
-    private CheeseDao cheeseDao;
+    private SpeciesDao speciesDao;
 
     @Autowired
-    private CategoryDao categoryDao;
+    private AnimalDao animalDao;
 
     // Request path: /animal
     @RequestMapping(value = "")
     public String index(Model model) {
-        model.addAttribute("cheeses", cheeseDao.findAll());
+        model.addAttribute("cheeses", speciesDao.findAll());
         model.addAttribute("title", "Animals Available for Adoption");
         return "animal/index";
     }
@@ -42,7 +41,7 @@ public class AnimalController {
     public String displayAddCheeseForm(Model model) {
         model.addAttribute("title", "Add Animal");
         model.addAttribute(new Cheese());
-        model.addAttribute("categories", categoryDao.findAll());
+        model.addAttribute("categories", animalDao.findAll());
         return "animal/add";
     }
 
@@ -54,19 +53,19 @@ public class AnimalController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Animal");
-            model.addAttribute("categories", categoryDao.findAll());
+            model.addAttribute("categories", animalDao.findAll());
             return "animal/add";
         }
 
-        Category cat = categoryDao.findOne(categoryId);
+        Category cat = animalDao.findOne(categoryId);
         newCheese.setCategory(cat);
-        cheeseDao.save(newCheese);
+        speciesDao.save(newCheese);
         return "redirect:";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveCheeseForm(Model model) {
-        model.addAttribute("cheeses", cheeseDao.findAll());
+        model.addAttribute("cheeses", speciesDao.findAll());
         model.addAttribute("title", "Remove Animal");
         return "animal/remove";
     }
@@ -75,7 +74,7 @@ public class AnimalController {
     public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
 
         for (int cheeseId : cheeseIds) {
-            cheeseDao.delete(cheeseId);
+            speciesDao.delete(cheeseId);
         }
 
         return "redirect:";
@@ -84,7 +83,7 @@ public class AnimalController {
     @RequestMapping(value= "species", method = RequestMethod.GET)
     public String category(Model model, @RequestParam int id){
 
-        Category cat = categoryDao.findOne(id);
+        Category cat = animalDao.findOne(id);
         List<Cheese> cheeses = cat.getCheeses();
         model.addAttribute("cheeses",cheeses);
         model.addAttribute("title", "Cheeses in Category: " + cat.getName());

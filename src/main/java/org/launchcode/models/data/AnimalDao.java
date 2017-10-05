@@ -11,5 +11,5 @@ import javax.transaction.Transactional;
  */
 @Repository
 @Transactional
-public interface CategoryDao extends CrudRepository<Category, Integer> {
+public interface AnimalDao extends CrudRepository<Category, Integer> {
 }
