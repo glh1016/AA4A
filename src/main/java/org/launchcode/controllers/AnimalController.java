@@ -32,7 +32,7 @@ public class AnimalController {
     // Request path: /animal
     @RequestMapping(value = "")
     public String index(Model model) {
-        model.addAttribute("cheeses", speciesDao.findAll());
+        model.addAttribute("animals", speciesDao.findAll());
         model.addAttribute("title", "Animals Available for Adoption");
         return "animal/index";
     }

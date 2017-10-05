@@ -8,7 +8,7 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<p th:unless="${cheeses} and ${cheeses.size()}">No Animals :(</p>
+<p th:unless="${animals} and ${animals.size()}">No Animals :(</p>
 
 
 <table class="table">
@@ -22,12 +22,12 @@
         <th>Photo</th>
     </tr>
 
-    <tr th:each="cheese : ${cheeses}">
-        <td th:text="${cheese.name}"></td>
-        <td th:text="${cheese.category.name}"></td>
-        <td th:text="${cheese.description}"></td>
-        <td th:text="${cheese.category.name}"></td>
-        <td th:text="${cheese.description}"></td>
+    <tr th:each="animal : ${animals}">
+        <td th:text="${animal.name}"></td>
+        <td th:text="${animal.category.name}"></td>
+        <td th:text="${animal.description}"></td>
+        <td th:text="${animal.category.name}"></td>
+        <td th:text="${animal.description}"></td>
     </tr>
 
 </table>
