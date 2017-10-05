@@ -19,27 +19,27 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("category")
-public class CategoryController {
+@RequestMapping("species")
+public class SpeciesController {
 
     @Autowired
     private CategoryDao categoryDao;
 
-    // Request path: /category
+    // Request path: /species
     @RequestMapping(value = "")
     public String index(Model model) {
 
         model.addAttribute("categories", categoryDao.findAll());
-        model.addAttribute("title", "Categories");
+        model.addAttribute("title", "Species");
 
-        return "category/index";
+        return "species/index";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCategoryForm(Model model) {
-        model.addAttribute("title", "Add Category");
+        model.addAttribute("title", "Add Species");
         model.addAttribute(new Category());
-        return "category/add";
+        return "species/add";
 
     }
 
@@ -47,8 +47,8 @@ public class CategoryController {
     public String add(Model model,
                       @ModelAttribute @Valid Category category, Errors errors){
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Category");
-            return "category/add";
+            model.addAttribute("title", "Add Species");
+            return "species/add";
         }
 
         categoryDao.save(category);

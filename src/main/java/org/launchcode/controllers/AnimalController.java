@@ -34,13 +34,13 @@ public class AnimalController {
     @RequestMapping(value = "")
     public String index(Model model) {
         model.addAttribute("cheeses", cheeseDao.findAll());
-        model.addAttribute("title", "My Cheeses");
+        model.addAttribute("title", "Animals Available for Adoption");
         return "animal/index";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCheeseForm(Model model) {
-        model.addAttribute("title", "Add Cheese");
+        model.addAttribute("title", "Add Animal");
         model.addAttribute(new Cheese());
         model.addAttribute("categories", categoryDao.findAll());
         return "animal/add";
@@ -53,7 +53,7 @@ public class AnimalController {
                                        Model model) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Cheese");
+            model.addAttribute("title", "Add Animal");
             model.addAttribute("categories", categoryDao.findAll());
             return "animal/add";
         }
@@ -67,7 +67,7 @@ public class AnimalController {
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveCheeseForm(Model model) {
         model.addAttribute("cheeses", cheeseDao.findAll());
-        model.addAttribute("title", "Remove Cheese");
+        model.addAttribute("title", "Remove Animal");
         return "animal/remove";
     }
 
@@ -81,7 +81,7 @@ public class AnimalController {
         return "redirect:";
     }
 
-    @RequestMapping(value= "category", method = RequestMethod.GET)
+    @RequestMapping(value= "species", method = RequestMethod.GET)
     public String category(Model model, @RequestParam int id){
 
         Category cat = categoryDao.findOne(id);
