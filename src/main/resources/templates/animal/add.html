@@ -13,12 +13,6 @@
         <span th:errors="*{name}" class="error"></span>
     </div>
     <div class="form-group">
-        <label th:for="description">Breed</label>
-        <input class="form-control" th:field="*{description}" />
-        <span th:errors="*{description}" class="error"></span>
-    </div>
-
-    <div class="form-group">
         <label th:for="type">Species</label>
         <select name="categoryId">
             <option th:each="category : ${categories}"
@@ -26,6 +20,23 @@
                     th:value="${category.id}"></option>
         </select>
     </div>
+    <div class="form-group">
+        <label th:for="description">Breed</label>
+        <input class="form-control" th:field="*{description}" />
+        <span th:errors="*{description}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="description">Age</label>
+        <input class="form-control" th:field="*{description}" />
+        <span th:errors="*{description}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="description">Description</label>
+        <input class="form-control" th:field="*{description}" />
+        <span th:errors="*{description}" class="error"></span>
+    </div>
+
+
 
     <input type="submit" value="Add Animal" />
 </form>
