@@ -22,7 +22,7 @@
 
         @OneToMany
         @JoinColumn(name = "category_id")
-        private List<Cheese> cheeses = new ArrayList<>();
+        private List<Animal> animals = new ArrayList<>();
 
         public Category(String name){
             this.name = name;
@@ -43,7 +43,7 @@
             this.name = name;
         }
 
-        public List<Cheese> getCheeses() {return cheeses;}
+        public List<Animal> getAnimals() {return animals;}
 
     }
 

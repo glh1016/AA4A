@@ -10,7 +10,7 @@ import java.util.List;
  * Created by LaunchCode
  */
 @Entity
-public class Cheese {
+public class Animal {
 
     @Id
     @GeneratedValue
@@ -20,22 +20,33 @@ public class Cheese {
     @Size(min=3, max=15)
     private String name;
 
+    @ManyToOne
+    private Category species;
+
+    @NotNull
+    @Size(min=1, message = "Breed must not be empty")
+    private String breed;
+
+    @NotNull
+    @Size(min=1, message = "Age must not be empty")
+    private String age;
+
     @NotNull
     @Size(min=1, message = "Description must not be empty")
     private String description;
 
-    @ManyToOne
-    private Category category;
 
 
-    public Cheese(String name, String description) {
+    public Animal(String name, String breed, String age, String description) {
         this.name = name;
+        this.breed = breed;
+        this.age = age;
         this.description = description;
     }
 
 
 
-    public Cheese() { }
+    public Animal() { }
 
     public int getId() {
         return id;
@@ -49,6 +60,14 @@ public class Cheese {
         this.name = name;
     }
 
+    public String getBreed() { return breed;}
+
+    public void setBreed(String breed) { this.breed = breed;}
+
+    public String getAge() { return age;}
+
+    public void setAge(String age) { this.age = age;}
+
     public String getDescription() {
         return description;
     }
@@ -58,11 +77,11 @@ public class Cheese {
     }
 
     public Category getCategory() {
-        return category;
+        return species;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategory(Category species) {
+        this.species = species;
     }
 }
 

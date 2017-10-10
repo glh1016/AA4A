@@ -1,7 +1,7 @@
 package org.launchcode.controllers;
 
+import org.launchcode.models.Animal;
 import org.launchcode.models.Category;
-import org.launchcode.models.Cheese;
 import org.launchcode.models.data.AnimalDao;
 import org.launchcode.models.data.SpeciesDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,15 +38,15 @@ public class AnimalController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddCheeseForm(Model model) {
+    public String displayAddAnimalForm(Model model) {
         model.addAttribute("title", "Add Animal");
-        model.addAttribute(new Cheese());
+        model.addAttribute(new Animal());
         model.addAttribute("categories", animalDao.findAll());
         return "animal/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddCheeseForm(@ModelAttribute  @Valid Cheese newCheese,
+    public String processAddAnimalForm(@ModelAttribute  @Valid Animal newAnimal,
                                        Errors errors,
                                        @RequestParam int categoryId,
                                        Model model) {
@@ -58,23 +58,23 @@ public class AnimalController {
         }
 
         Category cat = animalDao.findOne(categoryId);
-        newCheese.setCategory(cat);
-        speciesDao.save(newCheese);
+        newAnimal.setCategory(cat);
+        speciesDao.save(newAnimal);
         return "redirect:";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveCheeseForm(Model model) {
-        model.addAttribute("cheeses", speciesDao.findAll());
+    public String displayRemoveAnimalForm(Model model) {
+        model.addAttribute("animals", speciesDao.findAll());
         model.addAttribute("title", "Remove Animal");
         return "animal/remove";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
+    public String processRemoveAnimalForm(@RequestParam int[] animalIds) {
 
-        for (int cheeseId : cheeseIds) {
-            speciesDao.delete(cheeseId);
+        for (int animalId : animalIds) {
+            animalDao.delete(animalId);
         }
 
         return "redirect:";
@@ -84,8 +84,8 @@ public class AnimalController {
     public String category(Model model, @RequestParam int id){
 
         Category cat = animalDao.findOne(id);
-        List<Cheese> cheeses = cat.getCheeses();
-        model.addAttribute("cheeses",cheeses);
+        List<Animal> animals = cat.getAnimals();
+        model.addAttribute("animals",animals);
         model.addAttribute("title", "Cheeses in Category: " + cat.getName());
         return "animal/index";
 
