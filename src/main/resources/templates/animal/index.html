@@ -20,14 +20,16 @@
         <th>Age</th>
         <th>Description</th>
         <th>Photo</th>
+
     </tr>
 
     <tr th:each="animal : ${animals}">
         <td th:text="${animal.name}"></td>
         <td th:text="${animal.category.name}"></td>
+        <td th:text="${animal.breed}"></td>
+        <td th:text="${animal.age}"></td>
         <td th:text="${animal.description}"></td>
-        <td th:text="${animal.category.name}"></td>
-        <td th:text="${animal.description}"></td>
+        <td >photo</td>
     </tr>
 
 </table>
