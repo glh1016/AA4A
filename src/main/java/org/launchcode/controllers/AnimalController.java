@@ -74,7 +74,7 @@ public class AnimalController {
     public String processRemoveAnimalForm(@RequestParam int[] animalIds) {
 
         for (int animalId : animalIds) {
-            animalDao.delete(animalId);
+            speciesDao.delete(animalId);
         }
 
         return "redirect:";
@@ -86,7 +86,7 @@ public class AnimalController {
         Category cat = animalDao.findOne(id);
         List<Animal> animals = cat.getAnimals();
         model.addAttribute("animals",animals);
-        model.addAttribute("title", "Cheeses in Category: " + cat.getName());
+        model.addAttribute("title", "Species " + cat.getName());
         return "animal/index";
 
     }
