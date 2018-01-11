@@ -9,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -43,7 +44,7 @@ public class SpeciesController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(Model model,
-                      @ModelAttribute @Valid Category category, Errors errors){
+                      @ModelAttribute @Valid Category category, Errors errors) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Species");
             return "species/add";
@@ -51,6 +52,25 @@ public class SpeciesController {
 
         categoryDao.save(category);
         return "redirect:";
-    }}
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveSpeciesForm(Model model) {
+        model.addAttribute("species", categoryDao.findAll());
+        model.addAttribute("title", "Remove Species");
+        return "species/remove";
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveSpeciesForm(@RequestParam int[] animalIds) {
+
+        for (int animalId : animalIds) {
+            categoryDao.delete(animalId);
+        }
+
+        return "redirect:";
+    }
+
+}
 
 
