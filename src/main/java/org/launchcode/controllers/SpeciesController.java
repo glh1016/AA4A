@@ -22,13 +22,13 @@ import javax.validation.Valid;
 public class SpeciesController {
 
     @Autowired
-    private AnimalDao categoryDao;
+    private AnimalDao animalDao;
 
     // Request path: /species
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("categories", categoryDao.findAll());
+        model.addAttribute("categories", animalDao.findAll());
         model.addAttribute("title", "Species");
 
         return "species/index";
@@ -50,22 +50,22 @@ public class SpeciesController {
             return "species/add";
         }
 
-        categoryDao.save(category);
+        animalDao.save(category);
         return "redirect:";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveSpeciesForm(Model model) {
-        model.addAttribute("species", categoryDao.findAll());
+        model.addAttribute("species", animalDao.findAll());
         model.addAttribute("title", "Remove Species");
         return "species/remove";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveSpeciesForm(@RequestParam int[] animalIds) {
+    public String processRemoveSpeciesForm(@RequestParam int[] speciesIds) {
 
-        for (int animalId : animalIds) {
-            categoryDao.delete(animalId);
+        for (int speciesId : speciesIds) {
+            animalDao.delete(speciesId);
         }
 
         return "redirect:";
