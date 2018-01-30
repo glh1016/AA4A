@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+
+<h1 th:text="${'Welcome ' + user.username + '!'}"></h1>
+
+<nav> <a href="/animal"> Click here to edit animals available for adoption </a> </nav>
+
+
+</body>
+</html>
