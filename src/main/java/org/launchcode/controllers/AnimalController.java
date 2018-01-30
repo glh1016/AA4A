@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.util.List;
 
-/**
- * Created by LaunchCode
- */
+
 @Controller
 @RequestMapping("animal")
 public class AnimalController {
@@ -74,7 +72,7 @@ public class AnimalController {
     public String processRemoveAnimalForm(@RequestParam int[] animalIds) {
 
         for (int animalId : animalIds) {
-            animalDao.delete(animalId);
+            speciesDao.delete(animalId);
         }
 
         return "redirect:";

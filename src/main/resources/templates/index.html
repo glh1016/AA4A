@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+
+<p th:unless="${animals} and ${animals.size()}">No Animals Currently Available for Adoption</p>
+
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Species</th>
+        <th>Breed</th>
+        <th>Age</th>
+        <th>Description</th>
+        <th>Photo</th>
+
+    </tr>
+
+    <tr th:each="animal : ${animals}">
+        <td th:text="${animal.name}"></td>
+        <td th:text="${animal.category.name}"></td>
+        <td th:text="${animal.breed}"></td>
+        <td th:text="${animal.age}"></td>
+        <td th:text="${animal.description}"></td>
+        <td >photo</td>
+    </tr>
+
+</table>
+
+<nav>
+    <a href="/user/add">Administrator Registration/Login</a>
+</nav>
+
+
+</body>
+</html>
