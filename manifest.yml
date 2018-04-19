@@ -1,0 +1,6 @@
+applications:
+- name: aa4a
+  buildpack: java_buildpack
+  path: build/libs/animal-mvc-0.0.1-SNAPSHOT.jar
+  services:
+      - aa4a-db
